@@ -214,9 +214,7 @@ export const ReactTable = <T extends Record<string, any>>({
         <Flex gap="md">
           {seeDetail && (
             <Tooltip label="Xem">
-              <ActionIcon
-                onClick={() => router.push(`detail/${row.original.id}`)}
-              >
+              <ActionIcon onClick={() => router.push(`${row.original.id}`)}>
                 <IconEye />
               </ActionIcon>
             </Tooltip>

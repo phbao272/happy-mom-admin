@@ -19,8 +19,6 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
     redirect("/login");
   }
 
-  console.log("sessions", sessions);
-
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <LayoutWithNavbar role={sessions?.user?.role}>

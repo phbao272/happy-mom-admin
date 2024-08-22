@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
-export const PostForm = () => {
-  return (
-    <div>PostForm</div>
-  )
-}
+export const GroupForm = () => {
+  return <div>GroupForm</div>;
+};
