@@ -103,7 +103,7 @@ export function LinksGroup({
                 className={classes.icon}
                 size={24}
               >
-                <Icon style={{ width: rem(14), height: rem(14) }} />
+                <Icon style={{ width: rem(16), height: rem(16) }} />
               </ThemeIcon>
             )}
 

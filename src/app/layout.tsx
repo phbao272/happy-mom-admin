@@ -21,6 +21,7 @@ import {
   JotaiProvider
 } from "@/providers";
 import { DatesProvider } from "@mantine/dates";
+import WebVitals from "@/components/shared/web-vitals";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
       <body className={inter.className}>
+        <WebVitals />
         <SessionProvider>
           <JotaiProvider>
             <QueryClientProvider>

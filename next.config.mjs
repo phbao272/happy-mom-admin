@@ -9,5 +9,6 @@ const nextConfig = {
   compress: true,
 
   output: "standalone",
+  trailingSlash: true
 };
 export default nextConfig;

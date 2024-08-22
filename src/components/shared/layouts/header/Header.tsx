@@ -1,7 +1,6 @@
 "use client";
 
-import { Burger, Flex, Group, Image, Skeleton } from "@mantine/core";
-import LogoImg from "@assets/images/logo.png";
+import { Burger, Flex, Group, Skeleton, Text } from "@mantine/core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { tss } from "@libs/utils/tss-style";
@@ -38,13 +37,14 @@ export function Header({ opened, toggle, role }: Props) {
             justifyContent: "space-between"
           }}
         >
-          <Image
+          <Text>Logo</Text>
+          {/* <Image
             src={LogoImg.src}
             alt="logo"
             style={{
               height: 60
             }}
-          />
+          /> */}
 
           <Flex
             style={{

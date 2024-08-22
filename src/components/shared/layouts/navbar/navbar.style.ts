@@ -3,7 +3,6 @@ import { tss } from "@/libs/utils/tss-style";
 
 export const useStyles = tss.create(() => ({
   navbar_desktop: {
-    marginTop: "64px",
     height: "100%",
     backgroundColor: "white",
     overflowY: "auto",
