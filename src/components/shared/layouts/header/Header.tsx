@@ -1,6 +1,6 @@
 "use client";
 
-import { Burger, Flex, Group, Skeleton, Text } from "@mantine/core";
+import { Burger, Flex, Group, Image, Skeleton, Text } from "@mantine/core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { tss } from "@libs/utils/tss-style";
@@ -8,6 +8,7 @@ import { Auth } from "./components";
 import { MainContainer } from "@shared/layouts";
 import { isMobile } from "react-device-detect";
 import { Suspense } from "react";
+import LogoSvg from "@/assets/svgs/logo.svg";
 
 interface Props {
   toggle?: () => void;
@@ -37,14 +38,13 @@ export function Header({ opened, toggle, role }: Props) {
             justifyContent: "space-between"
           }}
         >
-          <Text>Logo</Text>
-          {/* <Image
-            src={LogoImg.src}
+          <Image
+            src={LogoSvg.src}
             alt="logo"
             style={{
               height: 60
             }}
-          /> */}
+          />
 
           <Flex
             style={{

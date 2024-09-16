@@ -33,3 +33,8 @@ export interface DataPagination<T extends any[]> {
   data: T;
   meta: IMetaPagination;
 }
+
+export interface IOption {
+  label: string;
+  value: string;
+}
