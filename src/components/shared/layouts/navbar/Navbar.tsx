@@ -5,10 +5,12 @@ import { LinksGroup } from "./navbar-links-group/NavbarLinksGroup";
 import { Suspense, useMemo } from "react";
 import {
   IconBell,
-  IconHome,
-  IconMapPin,
-  IconUser,
-  IconViewfinder
+  IconBook,
+  IconDiscount,
+  IconStar,
+  IconTools,
+  IconTrophy,
+  IconUsers,
 } from "@tabler/icons-react";
 import { useStyles } from "./navbar.style";
 import { ROLES } from "@/libs/utils/constants/roles";
@@ -27,7 +29,7 @@ export interface INavbar {
 const adminVietnameseSideBar = [
   {
     label: "Cẩm nang",
-    icon: IconViewfinder,
+    icon: IconBook,
     links: [
       {
         label: "Quản lý bài viết",
@@ -37,7 +39,7 @@ const adminVietnameseSideBar = [
   },
   {
     label: "Cộng đồng",
-    icon: IconUser,
+    icon: IconUsers,
     links: [
       {
         label: "Quản lý group",
@@ -47,7 +49,7 @@ const adminVietnameseSideBar = [
   },
   {
     label: "Deals",
-    icon: IconUser,
+    icon: IconDiscount,
     links: [
       {
         label: "Quản lý deals",
@@ -57,7 +59,7 @@ const adminVietnameseSideBar = [
   },
   {
     label: "Tính điểm (Point) & Nhiệm vụ, đổi quà",
-    icon: IconMapPin,
+    icon: IconStar,
     links: [
       {
         label: "Tính điểm",
@@ -76,11 +78,11 @@ const adminVietnameseSideBar = [
   {
     label: "Công cụ",
     link: "/admin/cong-cu",
-    icon: IconHome
+    icon: IconTools
   },
   {
     label: "Cuộc thi/Sự kiện",
-    icon: IconBell,
+    icon: IconTrophy,
     links: [
       {
         label: "Quản lý cuộc thi, sự kiện",
@@ -120,8 +122,6 @@ export const Navbar = ({ opened, role, toggle, closeNavbar }: Props) => {
 
   const links = useMemo(() => {
     const sideBar = SideBarByRole[role as keyof typeof SideBarByRole];
-
-
 
     return sideBar?.map((item) => (
       <LinksGroup {...item} key={item.label} closeNavbar={closeNavbar} />

@@ -18,6 +18,7 @@ import {
   Button,
   Flex,
   Modal,
+  ModalProps,
   ScrollArea,
   Stack,
   TextInput,
@@ -38,8 +39,7 @@ import { useTableContext } from "./components/TableContext";
 import { useTable } from "./hooks/useTable";
 import { request } from "@/libs/requests";
 import { toast } from "sonner";
-import { mkConfig, generateCsv, download } from "export-to-csv";
-import { useDebouncedValue } from "@mantine/hooks";
+import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
 import { getQueryClient } from "@/libs/query";
 
 interface IFetchedData<T> extends Record<string, any> {
@@ -50,6 +50,11 @@ interface IFetchedData<T> extends Record<string, any> {
     total: number;
     totalPages: number;
   };
+}
+
+interface IModal {
+  children: React.ReactNode;
+  modalProps: Omit<ModalProps, "opened" | "onClose">;
 }
 
 interface Props<T extends MRT_RowData> extends MRT_TableOptions<T> {
@@ -79,6 +84,8 @@ interface Props<T extends MRT_RowData> extends MRT_TableOptions<T> {
 
   isSaving?: boolean;
   handleReload?: () => void;
+
+  modal?: IModal;
 }
 
 export const ReactTable = <T extends Record<string, any>>({
@@ -98,12 +105,15 @@ export const ReactTable = <T extends Record<string, any>>({
   isSaving,
   handleReload,
   isCheckMine,
+  modal,
   ...props
 }: Props<T>) => {
   const router = useRouter();
   const queryClient = getQueryClient();
   const tableCtx = useTableContext();
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
+  const [modalOpened, { open: openModal, close: closeModal }] =
+    useDisclosure(false);
 
   const [searchOne, setSearchOne] = useState("");
   const [debouncedSearchOne] = useDebouncedValue(searchOne, 500);
@@ -205,7 +215,7 @@ export const ReactTable = <T extends Record<string, any>>({
           {seeDetail && (
             <Tooltip label="Xem">
               <ActionIcon
-                onClick={() => router.push(`${name}/detail/${row.original.id}`)}
+                onClick={() => router.push(`detail/${row.original.id}`)}
               >
                 <IconEye />
               </ActionIcon>
@@ -321,11 +331,17 @@ export const ReactTable = <T extends Record<string, any>>({
 
   return (
     <Stack>
+      {modal && (
+        <Modal opened={modalOpened} onClose={closeModal} {...modal.modalProps}>
+          {modal.children}
+        </Modal>
+      )}
+
       <Flex gap="md">
         {hasCreate ? (
           <Button
             onClick={() => {
-              router.push(`${name}/create`);
+              modal ? openModal() : router.push(`./create`);
             }}
           >
             Tạo mới
