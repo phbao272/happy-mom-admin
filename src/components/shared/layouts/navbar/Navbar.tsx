@@ -10,7 +10,7 @@ import {
   IconStar,
   IconTools,
   IconTrophy,
-  IconUsers,
+  IconUsers
 } from "@tabler/icons-react";
 import { useStyles } from "./navbar.style";
 import { ROLES } from "@/libs/utils/constants/roles";
@@ -37,6 +37,7 @@ const adminVietnameseSideBar = [
       }
     ]
   },
+
   {
     label: "Cộng đồng",
     icon: IconUsers,
