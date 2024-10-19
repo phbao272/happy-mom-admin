@@ -1,4 +1,6 @@
-import { ListPost } from "@/components/features/post/components";
+import { ListDeals } from "@/components/features/deals/components";
+import { DealsAPIQueryKey } from "@/components/features/deals/configs";
+import { getListDeals } from "@/components/features/deals/services";
 import { PostAPIQueryKey } from "@/components/features/post/configs";
 import { getListPost } from "@/components/features/post/services";
 import { getQueryClient } from "@/libs/query";
@@ -8,13 +10,13 @@ const Page = async () => {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [PostAPIQueryKey.GET_POSTS],
-    queryFn: getListPost
+    queryKey: [DealsAPIQueryKey.GET_DEALS],
+    queryFn: getListDeals
   });
 
   return (
     <div>
-      <ListPost />
+      <ListDeals />
     </div>
   );
 };
