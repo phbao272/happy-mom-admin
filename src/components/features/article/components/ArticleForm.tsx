@@ -71,11 +71,6 @@ export const ArticleForm = () => {
         <Input.Label required fw={600}>
           Thumbnail
         </Input.Label>
-        {/* <TextInput
-          name="thumbnail"
-          placeholder="nhập đường dẫn ảnh"
-          control={formReturn.control}
-        /> */}
         <SingleImageUploader name="thumbnail" control={formReturn.control} />
       </Stack>
       <Stack>
@@ -137,34 +132,7 @@ export const ArticleForm = () => {
         />
       </Stack>
 
-      {/* <Group justify="space-between">
-        <Input.Label fw={600}>Hình ảnh</Input.Label>
-        <Button variant="transparent" onClick={() => append({ url: "" })}>
-          Thêm
-        </Button>
-      </Group> */}
       <ImageUploader control={formReturn.control} name="images" />
-
-      {/* {fields.map((field, index) => (
-        <Stack key={field.id} gap={2}>
-          <TextInput
-            placeholder="nhập đường dẫn ảnh"
-            name={`images.${index}.url`}
-            control={formReturn.control}
-            rightSection={
-              fields.length > 1 && (
-                <ActionIcon
-                  opacity={0.5}
-                  variant="transparent"
-                  onClick={() => remove(index)}
-                >
-                  <Image src={MinusIcon} alt="medal" width={24} height={24} />
-                </ActionIcon>
-              )
-            }
-          />
-        </Stack>
-      ))} */}
 
       <Button onClick={onSubmit}>
         {params.id !== "create" ? "Cập nhật" : "Tạo mới"}

@@ -48,11 +48,11 @@ export interface ICount {
   likes: number;
 }
 
-export interface IGroup {
-  id: string;
-  name: string;
-  description: string;
-  background: string;
-  createdAt: string;
-  updatedAt: string;
-}
+// export interface IGroup {
+//   id: string;
+//   name: string;
+//   description: string;
+//   background: string;
+//   createdAt: string;
+//   updatedAt: string;
+// }
