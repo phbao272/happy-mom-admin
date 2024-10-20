@@ -56,3 +56,7 @@ export interface ICount {
 //   createdAt: string;
 //   updatedAt: string;
 // }
+
+export type UpdatePostGroupBody = {
+  groupId: string;
+};

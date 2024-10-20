@@ -45,6 +45,10 @@ const adminVietnameseSideBar = [
       {
         label: "Quản lý group",
         link: "/admin/quan-ly-group"
+      },
+      {
+        label: "Quản lý bài viết group",
+        link: "/admin/quan-ly-bai-viet-group"
       }
     ]
   },

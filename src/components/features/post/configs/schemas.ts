@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const createPostSchema = z
   .object({
-    groupId: z.string().optional(),
+    groupId: z.string().min(1, { message: "vui lòng chọn 1 nhóm" }),
     content: z.string().optional(),
     images: z.array(z.string()).optional()
   })

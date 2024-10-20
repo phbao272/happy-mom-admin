@@ -15,7 +15,8 @@ export const ListPost = () => {
           columns={columns}
           data={[]}
           seeDetail
-          hasCreate
+          hasCreate={false}
+          hasSearch={false}
           enableRowSelection={false}
           {...disableOptions}
         />
