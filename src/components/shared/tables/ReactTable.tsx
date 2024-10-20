@@ -66,6 +66,7 @@ interface Props<T extends MRT_RowData> extends MRT_TableOptions<T> {
   hasCreate?: boolean;
   hasEdit?: boolean;
   hasDelete?: boolean;
+  hasSearch?: boolean;
   endpointResourceAPI: string;
   data: T[];
   isCheckMine?: boolean;
@@ -96,6 +97,7 @@ export const ReactTable = <T extends Record<string, any>>({
   params,
   hasCreate,
   hasEdit,
+  hasSearch = true,
   hasDelete = true,
   endpointResourceAPI,
   data,
@@ -283,19 +285,21 @@ export const ReactTable = <T extends Record<string, any>>({
             alignItems: "center"
           }}
         >
-          <TextInput
-            style={{
-              width: "100%",
-              maxWidth: "200px"
-            }}
-            placeholder="Tìm kiếm"
-            value={searchOne}
-            onChange={(e) => setSearchOne(e.currentTarget.value)}
-            leftSectionPointerEvents="none"
-            leftSection={
-              <IconSearch style={{ width: rem(16), height: rem(16) }} />
-            }
-          />
+          {hasSearch && (
+            <TextInput
+              style={{
+                width: "100%",
+                maxWidth: "200px"
+              }}
+              placeholder="Tìm kiếm"
+              value={searchOne}
+              onChange={(e) => setSearchOne(e.currentTarget.value)}
+              leftSectionPointerEvents="none"
+              leftSection={
+                <IconSearch style={{ width: rem(16), height: rem(16) }} />
+              }
+            />
+          )}
 
           {customLeftTopToolbar
             ? customLeftTopToolbar(table, fetchedData)
