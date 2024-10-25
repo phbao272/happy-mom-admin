@@ -100,13 +100,17 @@ const adminVietnameseSideBar = [
     icon: IconBell,
     links: [
       {
-        label: "Thông báo theo kịch bản",
-        link: "/admin/thong-bao/kich-ban"
-      },
-      {
-        label: "Thông báo của hệ thống",
-        link: "/admin/thong-bao/he-thong"
+        label: "Quản lý thông báo",
+        link: "/admin/quan-ly-thong-bao"
       }
+      // {
+      //   label: "Thông báo theo kịch bản",
+      //   link: "/admin/thong-bao/kich-ban"
+      // },
+      // {
+      //   label: "Thông báo của hệ thống",
+      //   link: "/admin/thong-bao/he-thong"
+      // }
     ]
   }
 ];
