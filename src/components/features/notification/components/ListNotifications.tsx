@@ -15,12 +15,11 @@ export const ListNotifications = () => {
           columns={columns}
           data={[]}
           seeDetail={false}
-          hasCreate={false}
-          hasDelete={false}
           enableRowSelection={false}
           {...disableOptions}
           enableRowActions={false}
           enableColumnActions={false}
+          enableEditing={false}
         />
       </TableContextProvider>
     </div>
