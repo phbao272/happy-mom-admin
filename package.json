@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/core": "^0.37.3",
     "@emotion/react": "^11.11.4",
     "@hookform/resolvers": "^3.4.2",
     "@mantine/core": "^7.9.2",

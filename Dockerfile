@@ -11,17 +11,22 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 # Copy package files and install dependencies
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* tsconfig.json ./
 RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+
+# Install pnpm in builder stage
+RUN npm install -g pnpm
+
+# Copy node_modules and config files
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build Next.js app with memory optimization
-ENV NODE_OPTIONS="--max-old-space-size=1024"
+ENV NODE_OPTIONS="--max-old-space-size=8192"
 RUN pnpm run build
 
 # Production image, copy all necessary files

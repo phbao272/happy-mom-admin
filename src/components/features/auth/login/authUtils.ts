@@ -1,6 +1,7 @@
 "use server";
 import { signIn, signOut, unstable_update } from "@/auth";
-import { Session } from "@auth/core/types";
+import { IUser, IUserToken } from "@/libs/types";
+import { Session, User } from "@auth/core/types";
 
 interface SignInInput {
   email: string;
@@ -46,6 +47,8 @@ export const handleSignOut = async () => {
   });
 };
 
-export const handleUpdate = async (session: Session) => {
+export const handleUpdate = async (
+  session: Partial<Session & { user: Partial<IUserToken & IUser & User> }>
+) => {
   await unstable_update(session);
 };
