@@ -67,7 +67,7 @@ interface Props<T extends MRT_RowData> extends MRT_TableOptions<T> {
   hasEdit?: boolean;
   hasDelete?: boolean;
   hasSearch?: boolean;
-  endpointResourceAPI: string;
+  endpointResourceAPI?: string;
   data: T[];
   isCheckMine?: boolean;
 

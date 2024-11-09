@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import React, { useEffect } from "react";
-import { ActionIcon, Button, Group, Input, Stack } from "@mantine/core";
+import { Button, Input, Stack } from "@mantine/core";
 import { Textarea, TextInput } from "@/components/shared/inputs";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,7 +11,6 @@ import {
   CreateArticleSchema,
   defaultValues
 } from "../configs/schemas";
-import MinusIcon from "@/assets/svgs/minus.svg";
 import {
   useCreateOrUpdateArticle,
   useGetCategoryOption,
@@ -19,9 +18,7 @@ import {
   useGetSubCategoryOption
 } from "../hooks";
 import { Select } from "@/components/shared/inputs/Select";
-import Image from "next/image";
 import {
-  ImageDropzone,
   ImageUploader,
   SingleImageUploader
 } from "@/components/shared/ImageDropzone";
