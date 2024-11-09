@@ -1,45 +1,52 @@
-# Sử dụng hình ảnh Node.js cơ bản
+# Base image
 FROM node:20-alpine3.16 AS base
 
-# Bước cài đặt dependencies chỉ khi cần thiết
+# Install dependencies only when needed
 FROM base AS deps
+# Install compatibility libraries
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Cài đặt dependencies dựa trên package manager ưa thích
-COPY package.json package-lock.json* ./
-RUN \
-  if [ -f package-lock.json ]; then npm ci --legacy-peer-deps; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+# Install pnpm globally
+RUN npm install -g pnpm
 
-# Bước build mã nguồn chỉ khi cần thiết
+# Copy package files and install dependencies
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --frozen-lockfile --legacy-peer-deps
+
+# Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN npm run build
+# Build Next.js app with memory optimization
+ENV NODE_OPTIONS="--max-old-space-size=1024"
+RUN pnpm run build
 
-# Ảnh production, sao chép tất cả các file cần thiết và chạy next
+# Production image, copy all necessary files
 FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
 
+# Add non-root user for security
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Copy necessary files from the builder
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Tối ưu hóa kích thước ảnh bằng output file tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
+# Set permissions for non-root user
 USER nextjs
 
+# Expose port
 EXPOSE 3000
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "server.js"]
+# Start the Next.js server
+CMD ["pnpm", "start"]
