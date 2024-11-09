@@ -24,7 +24,7 @@ export const columns: MRT_ColumnDef<NotificationTypeWithEnum>[] = [
     accessorKey: "isActive",
     header: "Trạng thái",
     enableEditing: false,
-    Cell: ({ cell, row }) => <NotificationSwitch row={row} />
+    Cell: ({ row }) => <NotificationSwitch row={row} />
   }
   // {
   //   accessorKey: "createdAt",

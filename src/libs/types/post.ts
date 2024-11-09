@@ -1,3 +1,5 @@
+import { IGroup } from "./group";
+
 export interface IAuthor {
   id: string;
   username: string;
