@@ -80,11 +80,11 @@ const adminVietnameseSideBar = [
       }
     ]
   },
-  {
-    label: "Công cụ",
-    link: "/admin/cong-cu",
-    icon: IconTools
-  },
+  // {
+  //   label: "Công cụ",
+  //   link: "/admin/cong-cu",
+  //   icon: IconTools
+  // },
   {
     label: "Cuộc thi/Sự kiện",
     icon: IconTrophy,
