@@ -12,7 +12,7 @@ RUN npm install -g pnpm
 
 # Copy package files and install dependencies
 COPY package.json pnpm-lock.yaml* tsconfig.json ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --strict-peer-dependencies=false
 
 # Rebuild the source code only when needed
 FROM base AS builder
