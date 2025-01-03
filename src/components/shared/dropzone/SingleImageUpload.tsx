@@ -1,49 +1,36 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Group,
-  Text,
-  Box,
-  Input,
-  CloseButton,
-  LoadingOverlay
-} from "@mantine/core";
-import { Dropzone, FileRejection } from "@mantine/dropzone";
-import { Control, useController } from "react-hook-form";
-import { request } from "@/libs/requests";
-import { TextInput } from "../inputs";
-import Image from "next/image";
-import {
-  ACCEPTED_IMAGE_TYPES,
-  MAX_IMAGE_FILE_SIZE
-} from "@/libs/utils/files/image";
+'use client'
 
-interface ImageUploaderProps {
-  control: Control<any>;
-  name: string;
+import { uploadImage } from '@/libs/service'
+import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '@/libs/utils/constants'
+import {
+  Box,
+  Button,
+  CloseButton,
+  Group,
+  LoadingOverlay,
+  Text,
+} from '@mantine/core'
+import { Dropzone, type FileRejection } from '@mantine/dropzone'
+import Image from 'next/image'
+import { useState } from 'react'
+import { useController } from 'react-hook-form'
+import type { Control, Path } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form'
+
+interface ImageUploaderProps<T extends FieldValues> {
+  control: Control<T>
+  name: Path<T>
 }
 
 interface PreviewImage {
-  file: File;
-  preview: string;
+  file: File
+  preview: string
 }
 
-const uploadImage = async (file: File): Promise<string> => {
-  const formData = new FormData();
-  formData.append("file", file);
-
-  try {
-    const response = await request.post("/upload", formData, {
-      headers: { "Content-Type": "multipart/form-data" }
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Upload failed:", error);
-    throw error;
-  }
-};
-
-export function SingleImageUploader({ control, name }: ImageUploaderProps) {
+export function SingleImageUploader<T extends FieldValues>({
+  control,
+  name,
+}: ImageUploaderProps<T>) {
   const {
     field,
     fieldState: { error: errorTextField },

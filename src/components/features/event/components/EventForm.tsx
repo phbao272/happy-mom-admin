@@ -5,10 +5,11 @@ import React, { useEffect } from "react";
 import { Button, Input, Stack } from "@mantine/core";
 import {
   DateInputCustom,
+  MyEditor,
   Textarea,
   TextInput
 } from "@/components/shared/inputs";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   createDealSchema,
@@ -52,11 +53,12 @@ export const EventForm = () => {
         <Input.Label required fw={600}>
           Mô tả sự kiện
         </Input.Label>
-        <Textarea
-          name="description"
-          placeholder="nhập mô tả"
+        <Controller
           control={formReturn.control}
-          rows={5}
+          name="description"
+          render={({ field }) => (
+            <MyEditor {...field} error={formReturn.formState.errors.description?.message} />
+          )}
         />
       </Stack>
 

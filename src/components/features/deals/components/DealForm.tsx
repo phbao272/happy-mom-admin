@@ -5,12 +5,13 @@ import React, { useEffect } from "react";
 import { Button, Input, Stack } from "@mantine/core";
 import {
   DateInputCustom,
+  MyEditor,
   Textarea,
   TextInput
 } from "@/components/shared/inputs";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SingleImageUploader } from "@/components/shared/ImageDropzone";
+import { SingleImageUploader } from "@/components/shared/dropzone";
 import { useCreateOrUpdateDeal } from "../hooks/useCreateOrUpdateDeal";
 import { useGetDetailDeal } from "../hooks";
 import { createDealSchema, defaultValues, DealSchema } from "../configs";
@@ -66,11 +67,12 @@ export const DealForm = () => {
         <Input.Label required fw={600}>
           Mô tả
         </Input.Label>
-        <Textarea
-          name="description"
-          placeholder="nhập mô tả"
+        <Controller
           control={formReturn.control}
-          rows={5}
+          name="description"
+          render={({ field }) => (
+            <MyEditor {...field} error={formReturn.formState.errors.description?.message} />
+          )}
         />
       </Stack>
 

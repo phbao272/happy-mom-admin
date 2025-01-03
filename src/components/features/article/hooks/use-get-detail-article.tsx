@@ -5,6 +5,7 @@ import { getDetailArticle } from "../services";
 export const useGetDetailArticle = (id: string) => {
   return useQuery({
     queryKey: [ArticleAPIQueryKey.GET_ARTICLE, id],
-    queryFn: getDetailArticle(id)
+    queryFn: getDetailArticle(id),
+    enabled: !!id && id !== "create"
   });
 };
