@@ -1,6 +1,6 @@
 "use server";
 import { signIn, signOut, unstable_update } from "@/auth";
-import { Session } from "@auth/core/types";
+import type { Session } from "@auth/core/types";
 
 interface SignInInput {
   email: string;
@@ -45,7 +45,6 @@ export const handleSignOut = async () => {
     console.error("Sign out error", error);
   });
 };
-
 export const handleUpdate = async (session: Session) => {
-  await unstable_update(session);
+  await unstable_update(session as any);
 };
