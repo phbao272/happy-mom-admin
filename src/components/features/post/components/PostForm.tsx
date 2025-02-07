@@ -24,8 +24,6 @@ export const PostForm = () => {
   const postQuery = useGetDetailPost(params.id);
   const { mutate, isPending } = useMovePostToNewGroup(params.id);
 
-  console.log(formReturn.formState.errors);
-
   const groupOption = useGetGroupOption();
 
   useEffect(() => {
@@ -36,7 +34,6 @@ export const PostForm = () => {
 
   const onSubmit = formReturn.handleSubmit((data) => {
     mutate({ groupId: data.groupId as string });
-    console.log("data", data);
   });
 
   return (

@@ -15,11 +15,6 @@ export const columns: MRT_ColumnDef<IArticle>[] = [
     enableEditing: false
   },
   {
-    accessorKey: "content",
-    header: "Nội dung",
-    enableEditing: false
-  },
-  {
     accessorKey: "subCategory.category.name",
     header: "Chủ đề",
     enableEditing: false

@@ -5,6 +5,7 @@ import { getDetailDeal } from "../services";
 export const useGetDetailDeal = (id: string) => {
   return useQuery({
     queryKey: [DealsAPIQueryKey.GET_DEAL, id],
-    queryFn: getDetailDeal(id)
+    queryFn: getDetailDeal(id),
+    enabled: !!id && id !== "create"
   });
 };

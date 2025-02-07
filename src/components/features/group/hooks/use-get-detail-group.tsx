@@ -5,6 +5,7 @@ import { getDetailGroup } from "../services";
 export const useGetDetailGroup = (id: string) => {
   return useQuery({
     queryKey: [GroupAPIQueryKey.GET_GROUP, id],
-    queryFn: getDetailGroup(id)
+    queryFn: getDetailGroup(id),
+    enabled: !!id && id !== "create"
   });
 };

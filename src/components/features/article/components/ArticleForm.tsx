@@ -3,8 +3,8 @@
 import { useParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { Button, Input, Stack } from "@mantine/core";
-import { Textarea, TextInput } from "@/components/shared/inputs";
-import { useForm, useFieldArray } from "react-hook-form";
+import { MyEditor, Textarea, TextInput } from "@/components/shared/inputs";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   createArticleSchema,
@@ -19,19 +19,14 @@ import {
 } from "../hooks";
 import { Select } from "@/components/shared/inputs/Select";
 import {
-  ImageUploader,
+  MultipleImageUpload,
   SingleImageUploader
-} from "@/components/shared/ImageDropzone";
+} from "@/components/shared/dropzone";
 
 export const ArticleForm = () => {
   const formReturn = useForm<CreateArticleSchema>({
     resolver: zodResolver(createArticleSchema),
     defaultValues: defaultValues
-  });
-
-  const { fields, append, remove } = useFieldArray({
-    control: formReturn.control,
-    name: "images"
   });
 
   const params = useParams<{ id: string }>();
@@ -40,18 +35,16 @@ export const ArticleForm = () => {
   const subCategoryOption = useGetSubCategoryOption({
     categoryId: formReturn.watch("categoryId")
   });
-  const { mutate, isPending } = useCreateOrUpdateArticle(params.id);
+  const { mutate, isPending} = useCreateOrUpdateArticle(params.id);
 
   const onSubmit = formReturn.handleSubmit((data) => {
-    const images = data.images?.map((item) => item.url) ?? [];
-    mutate({ ...data, images });
+    mutate({ ...data });
   });
 
   useEffect(() => {
     if (articleQuery.data) {
       formReturn.reset({
         ...articleQuery.data,
-        images: articleQuery.data.images.map((url) => ({ url })),
         categoryId: articleQuery.data.subCategory.categoryId
       });
     }
@@ -85,11 +78,12 @@ export const ArticleForm = () => {
         <Input.Label required fw={600}>
           Nội dung bài viết
         </Input.Label>
-        <Textarea
-          name="content"
-          placeholder="nhập nội dung"
+        <Controller
           control={formReturn.control}
-          rows={5}
+          name="content"
+          render={({ field }) => (
+            <MyEditor {...field} error={formReturn.formState.errors.content?.message} />
+          )}
         />
       </Stack>
 
@@ -129,9 +123,9 @@ export const ArticleForm = () => {
         />
       </Stack>
 
-      <ImageUploader control={formReturn.control} name="images" />
+      <MultipleImageUpload control={formReturn.control} name="images" />
 
-      <Button onClick={onSubmit}>
+      <Button onClick={onSubmit} loading={isPending}>
         {params.id !== "create" ? "Cập nhật" : "Tạo mới"}
       </Button>
     </Stack>

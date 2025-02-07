@@ -47,14 +47,8 @@ export const createArticleSchema = z
     title: stringSchema,
     content: stringSchema,
     description: stringSchema,
-    thumbnail: urlSchema,
-    images: z
-      .array(
-        z.object({
-          url: urlSchema
-        })
-      )
-      .optional(),
+    thumbnail: stringSchema,
+    images: z.array(stringSchema).optional(),
     categoryId: selectSchema,
     subCategoryId: selectSchema
   })

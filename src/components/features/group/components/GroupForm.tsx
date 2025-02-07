@@ -6,7 +6,7 @@ import { Button, Input, Stack } from "@mantine/core";
 import { Textarea, TextInput } from "@/components/shared/inputs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SingleImageUploader } from "@/components/shared/ImageDropzone";
+import { SingleImageUploader } from "@/components/shared/dropzone";
 import { useCreateOrUpdateGroup } from "../hooks/useCreateOrUpdateGroup";
 import { useGetDetailGroup } from "../hooks";
 import { createGroupSchema, defaultValues, GroupSchema } from "../configs";

@@ -10,7 +10,7 @@ import {
 } from "@/components/shared/inputs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SingleImageUploader } from "@/components/shared/ImageDropzone";
+import { SingleImageUploader } from "@/components/shared/dropzone";
 import { Select } from "@/components/shared/inputs/Select";
 import {
   createDealSchema,
