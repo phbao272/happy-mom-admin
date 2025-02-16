@@ -1,6 +1,6 @@
-import { ListArticle } from "@/components/features/article/components/ListArticle";
-import { ArticleAPIQueryKey } from "@/components/features/article/configs";
-import { getListArticle } from "@/components/features/article/services";
+import { ListUser } from "@/components/features/user/components/ListUser";
+import { UserAPIQueryKey } from "@/components/features/user/configs";
+import { getListUser } from "@/components/features/user/services";
 import { getQueryClient } from "@/libs/query";
 import React from "react";
 
@@ -8,13 +8,13 @@ const Page = async () => {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [ArticleAPIQueryKey.GET_ARTICLES],
-    queryFn: getListArticle
+    queryKey: [UserAPIQueryKey.GET_USERS],
+    queryFn: getListUser
   });
 
   return (
     <div>
-      <ListArticle />
+      <ListUser />
     </div>
   );
 };

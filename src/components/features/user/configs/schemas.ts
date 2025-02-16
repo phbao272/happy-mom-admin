@@ -27,17 +27,13 @@ const selectSchema = z
 
 export const createUserSchema = z
   .object({
-    name: stringSchema,
     username: stringSchema,
-    password: stringSchema,
-    role: selectSchema
+    subscriptionId: selectSchema
   })
 
 export type CreateUserSchema = z.infer<typeof createUserSchema>;
 
-export const defaultValues = {
-  name: "",
+export const defaultValues: CreateUserSchema = {
   username: "",
-  password: "",
-  role: ""
+  subscriptionId: ""
 };

@@ -5,6 +5,16 @@ export interface IUser {
   name: string;
   username: string;
   role: ROLES_TYPE;
+  currentSubscriptionPackage: ICurrentSubscriptionPackage;
+}
+
+export interface ICurrentSubscriptionPackage {
+  id: string;
+  title: string;
+  description: string;
+  service: string[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IUserToken {

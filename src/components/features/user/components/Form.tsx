@@ -11,19 +11,10 @@ import {
   type CreateUserSchema,
   defaultValues
 } from "../configs/schemas";
-import {
-  useCreateOrUpdateUser,
-  useGetDetailUser
-} from "../hooks";
+import { useCreateOrUpdateUser, useGetDetailUser } from "../hooks";
 import { Select } from "@/components/shared/inputs/Select";
 import { useQuery } from "@tanstack/react-query";
 import { request } from "@/libs/requests";
-
-const serviceOptions = [
-  { value: "1", label: "Gói dịch vụ 1" },
-  { value: "2", label: "Gói dịch vụ 2" },
-  { value: "3", label: "Gói dịch vụ 3" }
-];
 
 export const UserForm = () => {
   const formReturn = useForm<CreateUserSchema>({
@@ -32,6 +23,7 @@ export const UserForm = () => {
   });
 
   const params = useParams<{ id: string }>();
+
   const userQuery = useGetDetailUser(params.id);
   const { mutate, isPending } = useCreateOrUpdateUser(params.id);
 
@@ -39,13 +31,15 @@ export const UserForm = () => {
     mutate({ ...data });
   });
 
-  const { data: subscriptionOptions } = useQuery<{
-    id: string;
-    title: string;
-  }[]>({
-    queryKey: ['subscriptionOptions'],
+  const { data: subscriptionOptions } = useQuery<
+    {
+      id: string;
+      title: string;
+    }[]
+  >({
+    queryKey: ["subscriptionOptions"],
     queryFn: async () => {
-      const res = await request.get('/subscriptions');
+      const res = await request.get("/subscriptions/admin");
       return res.data;
     }
   });
@@ -54,6 +48,7 @@ export const UserForm = () => {
     if (userQuery.data) {
       formReturn.reset({
         ...userQuery.data,
+        subscriptionId: userQuery.data.currentSubscriptionPackage.id
       });
     }
   }, [formReturn, userQuery.data]);
@@ -67,35 +62,13 @@ export const UserForm = () => {
     >
       <Stack>
         <Input.Label required fw={600}>
-          Tên người dùng
-        </Input.Label>
-        <TextInput
-          name="name"
-          placeholder="nhập tên người dùng"
-          control={formReturn.control}
-        />
-      </Stack>
-      <Stack>
-        <Input.Label required fw={600}>
           Tên đăng nhập
         </Input.Label>
         <TextInput
           name="username"
           placeholder="nhập tên người dùng"
           control={formReturn.control}
-        />
-      </Stack>
-
-      <Stack>
-        <Input.Label required fw={600}>
-          Mật khẩu
-        </Input.Label>
-        <Controller
-          control={formReturn.control}
-          name="password"
-          render={({ field }) => (
-            <TextInput {...field} error={formReturn.formState.errors.password?.message} />
-          )}
+          disabled
         />
       </Stack>
 
@@ -105,9 +78,12 @@ export const UserForm = () => {
         </Input.Label>
         <Select
           placeholder="chọn gói dịch vụ"
-          name="role"
+          name="subscriptionId"
           control={formReturn.control}
-          data={serviceOptions}
+          data={subscriptionOptions?.map((item) => ({
+            value: item.id,
+            label: item.title
+          }))}
         />
       </Stack>
 

@@ -16,6 +16,7 @@ export const ListUser = () => {
           data={[]}
           seeDetail
           hasCreate
+          hasDelete={false}
           enableRowSelection={false}
           {...disableOptions}
         />

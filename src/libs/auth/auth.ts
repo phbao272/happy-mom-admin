@@ -1,14 +1,14 @@
-import NextAuth, { Session, type DefaultSession } from "next-auth";
-import { IUser, IUserLoginResponse, IUserToken } from "../types/user";
+import NextAuth, { type Session, type DefaultSession } from "next-auth";
+import type { IUser, IUserLoginResponse, IUserToken } from "../types/user";
 import Credentials, {
-  CredentialsConfig
+  type CredentialsConfig
 } from "next-auth/providers/credentials";
 import axios from "axios";
 import { API_URL } from "../utils/constants";
 
 import { CredentialsSignin } from "@auth/core/errors";
 
-const authUrl = process.env["NEXTAUTH_URL"] ?? "http://localhost:3000";
+const authUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000";
 
 class InvalidLoginError extends CredentialsSignin {
   code = "custom";
@@ -40,8 +40,8 @@ declare module "next-auth" {
        * you need to add them back into the newly declared interface.
        */
     } & IUserToken &
-      IUser &
-      DefaultSession["user"];
+    IUser &
+    DefaultSession["user"];
   }
 }
 

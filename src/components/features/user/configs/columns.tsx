@@ -5,11 +5,6 @@ import type { MRT_ColumnDef } from "mantine-react-table";
 
 export const columnsUser: MRT_ColumnDef<IUser>[] = [
   {
-    accessorKey: "name",
-    header: "Tên người dùng",
-    enableEditing: false
-  },
-  {
     accessorKey: "username",
     header: "Tên đăng nhập",
     enableEditing: false
@@ -18,5 +13,15 @@ export const columnsUser: MRT_ColumnDef<IUser>[] = [
     accessorKey: "role",
     header: "Vai trò",
     enableEditing: false
+  },
+  {
+    accessorKey: "currentSubscriptionPackage.title",
+    header: "Gói dịch vụ",
+    enableEditing: false,
+    Cell: ({ row }) => {
+      return (
+        <p>{row.original.currentSubscriptionPackage?.title || "Miễn phí"}</p>
+      );
+    }
   }
 ];

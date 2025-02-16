@@ -112,6 +112,16 @@ const adminVietnameseSideBar = [
       //   link: "/admin/thong-bao/he-thong"
       // }
     ]
+  },
+  {
+    label: "Người dùng",
+    icon: IconUsers,
+    links: [
+      {
+        label: "Quản lý người dùng",
+        link: "/admin/quan-ly-nguoi-dung"
+      }
+    ]
   }
 ];
 
